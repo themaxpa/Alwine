@@ -1,24 +1,38 @@
+  const music = document.getElementById("bgMusic");
+  let hasPlayed = false; // ensures music starts only once
+  let interval;
 
-    const bgm = new Audio();
-    bgm.src = '../bgm/loveStory.mp3';
-    bgm.loop = true;
-    bgm.volume = 0;
-    
-    const playWithFade = () => {
-        bgm.play();
-        let vol = 0;
-        const fadeIn = setInterval(() => {
-            if (vol < 0.3) {
-                vol += 0.02;
-                bgm.volume = vol;
-            } else {
-                clearInterval(fadeIn);
-            }
-        }, 100);
-    };
-    
-    playWithFade();
-    
-    document.addEventListener('click', () => {
-        if (bgm.paused) playWithFade();
-    }, { once: true });
+  function fadeIn(audio) {
+    audio.volume = 0;
+    audio.play().catch(err => console.log("Autoplay blocked:", err));
+    let fade = setInterval(() => {
+      if (audio.volume < 0.9) {
+        audio.volume += 0.05;
+      } else {
+        clearInterval(fade);
+      }
+    }, 200);
+  }
+
+  function startMusicCycle() {
+    // Start first fade-in play
+    fadeIn(music);
+
+    // Repeat every 45 seconds
+    interval = setInterval(() => {
+      music.currentTime = 0;
+      fadeIn(music);
+    }, 45000); // 45 seconds
+  }
+
+  function startOnFirstInteraction() {
+    if (!hasPlayed) {
+      startMusicCycle();
+      hasPlayed = true; // ensure it won't restart on future interactions
+    }
+  }
+
+  // Trigger only once on first scroll/touch/click
+  window.addEventListener("scroll", startOnFirstInteraction, { once: true });
+  window.addEventListener("touchstart", startOnFirstInteraction, { once: true });
+  window.addEventListener("click", startOnFirstInteraction, { once: true });
