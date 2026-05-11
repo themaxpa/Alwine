@@ -25,7 +25,147 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    </style><script
+    </style>
+    
+   <script>
+
+/* ========================================= */
+/* ULTRA OPTIMIZED 500+ VIDEO SYSTEM */
+/* ========================================= */
+
+const videos = document.querySelectorAll(".video-item video");
+
+/* ========================================= */
+/* PRIORITY LOAD */
+/* Only visible videos load first */
+/* ========================================= */
+
+const videoObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        const video = entry.target;
+
+        /* VIDEO ENTERS SCREEN */
+        if(entry.isIntersecting){
+
+            /* load only once */
+            if(!video.dataset.loaded){
+
+                video.dataset.loaded = "true";
+
+                /* fast lightweight loading */
+                video.preload = "metadata";
+
+                video.load();
+
+            }
+
+            /* autoplay visible video */
+            video.playbackRate = 1;
+
+            video.play().catch(() => {});
+
+        }else{
+
+            /* pause hidden videos */
+            video.pause();
+
+        }
+
+    });
+
+},{
+    rootMargin:"400px", /* preload before entering screen */
+    threshold:0.1
+});
+
+
+/* ========================================= */
+/* VIDEO INITIALIZATION */
+/* ========================================= */
+
+videos.forEach((video,index) => {
+
+    video.muted = true;
+
+    video.loop = true;
+
+    video.playsInline = true;
+
+    /* NEVER LOAD EVERYTHING */
+    video.preload = "none";
+
+    /* observe */
+    videoObserver.observe(video);
+
+});
+
+
+/* ========================================= */
+/* SKELETON REMOVE */
+/* ========================================= */
+
+videos.forEach(video => {
+
+    video.addEventListener("canplay", () => {
+
+        video.parentElement.classList.add("loaded");
+
+    });
+
+});
+
+
+/* ========================================= */
+/* AUTO DETECT VIDEO SHAPE */
+/* ========================================= */
+
+videos.forEach(video => {
+
+    video.addEventListener("loadedmetadata", () => {
+
+        const width = video.videoWidth;
+        const height = video.videoHeight;
+
+        if(width > height){
+
+            video.setAttribute("video-ratio","landscape");
+
+        }else if(height > width){
+
+            video.setAttribute("video-ratio","portrait");
+
+        }else{
+
+            video.setAttribute("video-ratio","square");
+
+        }
+
+    });
+
+});
+
+
+/* ========================================= */
+/* REDUCE CPU WHEN TAB HIDDEN */
+/* ========================================= */
+
+document.addEventListener("visibilitychange", () => {
+
+    if(document.hidden){
+
+        videos.forEach(video => video.pause());
+
+    }
+
+});
+
+</script>
+    
+
+
+    <script
             type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"USD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script></head><body
         class="body"><div class="page-wrapper"><header class="header"><header
                     class="navbar"><div
@@ -99,183 +239,85 @@
     style="font-size: 1.8rem;">I admired every pictures because they were seen through your eyes, Gauri</h4></div></div><div
                             class="max-width-huge"><p> Because you never realized how quietly I held onto each one.</p></div></div>
                                 
-                               <div class="image-grid" >
-    <!-- Image 1 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/b1.jpg"
-             alt=""
-             loading="lazy">
+   <!-- Pinterest Style Auto Video Grid -->
+<!-- PINTEREST VIDEO SECTION -->
+<section class="pinterest-video-section">
+
+    <div class="video-grid">
+
+        <!-- VIDEO 1 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v1.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- VIDEO 2 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v2.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- VIDEO 3 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v3.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- VIDEO 4 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v4.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- VIDEO 5 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v5.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- VIDEO 6 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v6.mp4" type="video/mp4">
+            </video>
+        </div>
+
+         <!-- VIDEO 7 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v7.mp4" type="video/mp4">
+            </video>
+        </div>
+
+         <!-- VIDEO 8 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v8.mp4" type="video/mp4">
+            </video>
+        </div>
+
+         <!-- VIDEO 9 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v9.mp4" type="video/mp4">
+            </video>
+        </div>
+
+         <!-- VIDEO 10 -->
+        <div class="video-item">
+            <video autoplay muted loop playsinline preload="metadata">
+                <source src="./assets/videos/v6.mp4" type="video/mp4">
+            </video>
+        </div>
+
     </div>
 
-    <!-- Image 2 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/b2.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 3 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/b3.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 4 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g17.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 5 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/angel.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 6 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/hsb500.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 7 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/apLD.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 8   -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/apR.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 9 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/u1800.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-<!-- Image 10 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 11 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g23.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 12 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g17.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 13 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 14 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 15 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 16 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 17 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 18 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 19 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 20 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 21 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-
-    <!-- Image 22 -->
-    <div class="photo-item">
-        <img class="clean-image" 
-             src="./assets/img/gallery/g14.jpg"
-             alt=""
-             loading="lazy">
-    </div>
-</div>
+</section>
                                                 
                                                 
                                                 </div></section></main><footer

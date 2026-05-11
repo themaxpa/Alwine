@@ -9582,3 +9582,134 @@ html {
         grid-template-columns: 1fr;
     }
 }
+/* ========================================= */
+/* PINTEREST AUTO VIDEO GRID */
+/* ========================================= */
+
+.pinterest-video-section{
+    width:100%;
+    padding:20px;
+}
+
+/* MASONRY GRID */
+.video-grid{
+    column-count:4;
+    column-gap:14px;
+}
+
+/* VIDEO CARD */
+.video-item{
+    position:relative;
+
+    width:100%;
+
+    margin-bottom:14px;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:#111;
+
+    break-inside:avoid;
+}
+
+/* VIDEO */
+.video-item video{
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:transform .5s ease;
+}
+
+/* HOVER */
+.video-item:hover video{
+    transform:scale(1.04);
+}
+
+/* ========================================= */
+/* AUTO SHAPE DETECTION */
+/* ========================================= */
+
+/* Portrait Videos */
+.video-item video[video-ratio="portrait"]{
+    aspect-ratio:9/16;
+}
+
+/* Landscape Videos */
+.video-item video[video-ratio="landscape"]{
+    aspect-ratio:16/9;
+}
+
+/* Square Videos */
+.video-item video[video-ratio="square"]{
+    aspect-ratio:1/1;
+}
+
+/* ========================================= */
+/* LARGE SCREEN */
+/* ========================================= */
+
+@media screen and (min-width:1600px){
+
+    .video-grid{
+        column-count:5;
+    }
+
+}
+
+/* ========================================= */
+/* LAPTOP */
+/* ========================================= */
+
+@media screen and (max-width:1200px){
+
+    .video-grid{
+        column-count:3;
+    }
+
+}
+
+/* ========================================= */
+/* TABLET */
+/* ========================================= */
+
+@media screen and (max-width:768px){
+
+    .video-grid{
+        column-count:2;
+        column-gap:10px;
+    }
+
+    .video-item{
+        margin-bottom:10px;
+    }
+
+}
+
+/* ========================================= */
+/* MOBILE */
+/* ========================================= */
+
+@media screen and (max-width:480px){
+
+    .pinterest-video-section{
+        padding:8px;
+    }
+
+    .video-grid{
+        column-count:1;
+        column-gap:8px;
+    }
+
+    .video-item{
+        margin-bottom:8px;
+        border-radius:16px;
+    }
+
+}

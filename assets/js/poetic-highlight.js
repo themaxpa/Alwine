@@ -25,3 +25,10 @@ function initPoeticHighlight() {
 
 // Initialize on page load
 window.addEventListener('load', initPoeticHighlight);
+
+// Force autoplay on all videos
+document.querySelectorAll("video").forEach(video => {
+    video.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+    });
+});
